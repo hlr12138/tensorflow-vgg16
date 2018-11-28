@@ -10,14 +10,12 @@ class Vgg16:
     def __init__(self, vgg16_path = None):
         if vgg16_path is None:
             vgg16_path = os.path.join(os.getcwd(), "vgg16.npy")
-            print("vgg16_path: ", vgg16_path)
             self.data_dict = np.load(vgg16_path, encoding='latin1').item()
 
         # for x in self.data_dict:  # print the key
         #     print(x)
 
     def forward(self, images):
-        plt.figure("process picture")
         print("build model started")
         start_time = time.time()
 
@@ -103,10 +101,6 @@ class Vgg16:
             x = tf.reshape(x, [-1, dim])
             w = self.get_fc_weight(name)
             b = self.get_bias(name)
-            print(name)
-            print(x.get_shape().as_list())
-            print(w.get_shape().as_list())
-            print(b.get_shape().as_list())
             result = tf.nn.bias_add(tf.matmul(x, w), b)
 
             return result

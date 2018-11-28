@@ -16,7 +16,6 @@ with tf.Session() as sess:
     vgg = vgg16.Vgg16()
     vgg.forward(x)
     prob = sess.run(vgg.prob, feed_dict={x:img})
-    print(np.shape(prob))
     # reverse sort
     top5 = np.argsort(prob[0])[-1:-6:-1] # the last -1 is strides
     # print('top5:', top5)
